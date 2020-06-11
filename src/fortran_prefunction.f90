@@ -20,8 +20,6 @@ program array_maker
     integer :: a, b
     doublecomplex f
 
-    print *, f(thing)
-
     do a=-500,500
         do b =-500,500
             domain(a, b) = complex(real(a)/100.0, real(b)/100.0)
@@ -48,6 +46,9 @@ program array_maker
         do b =-500,500
             write(1,*) real(output_polar(a, b)), imag(output_polar(a, b))
         end do
+        if (modulo(a+500, 100) == 0) then
+            print *, (a+500)/10, " % done"
+        end if
     end do
     close(1)
 
