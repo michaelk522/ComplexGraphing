@@ -51,20 +51,16 @@ public class Main {
                 "\n end function f");
         myWriter.close();
 
-//        Scanner tester = new Scanner(fortranWithFunction);
-//        while (tester.hasNextLine()) {
-//            System.out.println(tester.nextLine());
-//        }
-
         try
         {
-            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd src && gfortran fortran_with_function.f90 && a.exe\"");
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd src && gfortran fortran_with_function.f90 && a.exe && exit\"");
         }
         catch (Exception e)
         {
             System.out.println("Something in the cmd messed up");
             e.printStackTrace();
         }
+
         try {
             sleep(10000);
         } catch (InterruptedException e) {
@@ -89,10 +85,6 @@ public class Main {
             }
         }
 
-        System.out.println(Arrays.toString(numberStrings[0][0]));
-        System.out.println(Arrays.toString(numberStrings[500][500]));
-        System.out.println(Arrays.toString(numberStrings[1000][1000]));
-
         // Turns the String[][] to an int[][]
         for (int j = 0; j < 1001; j ++) {
             for (int k =0; k < 1001; k ++) {
@@ -100,11 +92,6 @@ public class Main {
                 numbers[j][k][1] = Double.parseDouble(numberStrings[j][k][1]);
             }
         }
-
-        System.out.println(Arrays.toString(numbers[0][0]));
-        System.out.println(Arrays.toString(numbers[500][500]));
-        System.out.println(Arrays.toString(numbers[1000][1000]));
-
 
         int width = 1001;
         int height = 1001;
@@ -123,8 +110,6 @@ public class Main {
             }
         }
 
-        System.out.println(HSBtoRGB(0, 50, 50));
-
         // Save as PNG
         File file = new File("Complex Graph.png");
         ImageIO.write(bufferedImage, "png", file);
@@ -137,11 +122,8 @@ public class Main {
             System.out.println("An error occurred deleting a.exe");
         }
 
-
         Desktop desktop = Desktop.getDesktop();
         desktop.open(file);
-
-
 
     }
 
