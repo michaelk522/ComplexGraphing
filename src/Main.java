@@ -18,12 +18,9 @@ public class Main {
             System.out.println("An error occurred creating fortranWithFunction.f90");
         }
 
-        FileInputStream instream = null;
-        FileOutputStream outstream = null;
-
         try {
-            instream = new FileInputStream(fortranPrefunction);
-            outstream = new FileOutputStream(fortranWithFunction);
+            FileInputStream instream = new FileInputStream(fortranPrefunction);
+            FileOutputStream outstream = new FileOutputStream(fortranWithFunction);
 
             byte[] buffer = new byte[1024];
 
