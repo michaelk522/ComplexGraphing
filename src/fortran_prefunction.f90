@@ -42,11 +42,6 @@ program array_maker
         end do
     end do
 
-    do a=-10,10
-        do b =-10,10
-            print *, domain(a,b), output_cartesian(a, b), output_polar(a,b)
-        end do
-    end do
 
     open(1, file = 'C:\Users\Michael\IdeaProjects\ComplexGraphingColors\src\data.txt', status='old')
     do a=-500,500
