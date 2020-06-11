@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Arrays;
@@ -125,7 +126,7 @@ public class Main {
         System.out.println(HSBtoRGB(0, 50, 50));
 
         // Save as PNG
-        File file = new File("myimage.png");
+        File file = new File("Complex Graph.png");
         ImageIO.write(bufferedImage, "png", file);
 
         if (!fortranWithFunction.delete()){
@@ -135,6 +136,11 @@ public class Main {
         if (!fortranExecutable.delete()) {
             System.out.println("An error occurred deleting a.exe");
         }
+
+
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(file);
+
 
 
     }
