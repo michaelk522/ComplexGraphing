@@ -6,6 +6,7 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 
 import static java.awt.Color.*;
+import static java.lang.Thread.sleep;
 
 public class Main {
 
@@ -52,7 +53,28 @@ public class Main {
                 "\n end function f");
         myWriter.close();
 
-        File mark = new File ("C:\\Users\\Michael\\IdeaProjects\\ComplexGraphingColors\\src\\number2.txt");
+//        Scanner tester = new Scanner(fortranWithFunction);
+//        while (tester.hasNextLine()) {
+//            System.out.println(tester.nextLine());
+//        }
+
+        try
+        {
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd src && gfortran fortran_with_function.f90 && a.exe\"");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Something in the cmd messed up");
+            e.printStackTrace();
+        }
+        try {
+            sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        File mark = new File ("C:\\Users\\Michael\\IdeaProjects\\ComplexGraphingColors\\src\\data.txt");
         Scanner scanner = new Scanner(mark);
         String[][][] numberStrings = new String[1001][1001][2];
         double[][][] numbers = new double[1001][1001][2];
@@ -93,7 +115,6 @@ public class Main {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
 
-
         for (int i = 0; i < 1001; i++) {
             for (int j = 0; j < 1001; j++) {
                 float H = (float) (numbers[i][j][1]/(2*Math.PI));
@@ -106,30 +127,18 @@ public class Main {
 
         System.out.println(HSBtoRGB(0, 50, 50));
 
-
-//        // create a circle with black
-//        g2d.setColor(Color.black);
-//        g2d.fillOval(0, 0, width, height);
-//
-//        // create a string with yellow
-//        g2d.setColor(Color.yellow);
-//        g2d.drawString("Java Code Geeks", 50, 120);
-//
-//        // Disposes of this graphics context and releases any system resources that it is using.
-//        g2d.dispose();
-
         // Save as PNG
         File file = new File("myimage.png");
         ImageIO.write(bufferedImage, "png", file);
 
-        // Save as JPEG
-        file = new File("myimage.jpg");
-        ImageIO.write(bufferedImage, "jpg", file);
-
-
         if (!fortranWithFunction.delete()){
             System.out.println("An error occurred deleting fortranWithFunction.f90");
         }
+        File fortranExecutable = new File("src\\a.exe");
+        if (!fortranExecutable.delete()) {
+            System.out.println("An error occurred deleting a.exe");
+        }
+
 
     }
 

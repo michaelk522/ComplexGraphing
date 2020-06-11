@@ -48,7 +48,7 @@ program array_maker
         end do
     end do
 
-    open(1, file = 'C:\Users\Michael\IdeaProjects\ComplexGraphingColors\src\number2.txt', status='old')
+    open(1, file = 'C:\Users\Michael\IdeaProjects\ComplexGraphingColors\src\data.txt', status='old')
     do a=-500,500
         do b =-500,500
             write(1,*) real(output_polar(a, b)), imag(output_polar(a, b))
