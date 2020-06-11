@@ -1,6 +1,5 @@
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,6 +10,48 @@ import static java.awt.Color.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        File fortranPrefunction = new File("C:\\Users\\Michael\\IdeaProjects\\ComplexGraphingColors\\src\\fortran_prefunction.f90");
+
+        File fortranWithFunction = new File("C:\\Users\\Michael\\IdeaProjects\\ComplexGraphingColors\\src\\fortran_with_function.f90");
+        if (!fortranWithFunction.createNewFile()){
+            System.out.println("An error occurred creating fortranWithFunction.f90");
+        }
+
+        FileInputStream instream = null;
+        FileOutputStream outstream = null;
+
+        try {
+            instream = new FileInputStream(fortranPrefunction);
+            outstream = new FileOutputStream(fortranWithFunction);
+
+            byte[] buffer = new byte[1024];
+
+            int length;
+            /*copying the contents from input stream to
+             * output stream using read and write methods
+             */
+            while ((length = instream.read(buffer)) > 0){
+                outstream.write(buffer, 0, length);
+            }
+
+            //Closing the input/output file streams
+            instream.close();
+            outstream.close();
+
+        } catch(IOException ioe){
+            System.out.println("File copied unsuccessfully!!");
+            ioe.printStackTrace();
+        }
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter your function with 'z' as the independent variable. Ex: z**2-1");
+        String userFunction = input.nextLine();
+
+        FileWriter myWriter = new FileWriter(fortranWithFunction, true);
+        myWriter.write("\n y = " + userFunction +
+                "\n end function f");
+        myWriter.close();
+
         File mark = new File ("C:\\Users\\Michael\\IdeaProjects\\ComplexGraphingColors\\src\\number2.txt");
         Scanner scanner = new Scanner(mark);
         String[][][] numberStrings = new String[1001][1001][2];
@@ -84,6 +125,11 @@ public class Main {
         // Save as JPEG
         file = new File("myimage.jpg");
         ImageIO.write(bufferedImage, "jpg", file);
+
+
+        if (!fortranWithFunction.delete()){
+            System.out.println("An error occurred deleting fortranWithFunction.f90");
+        }
 
     }
 
